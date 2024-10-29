@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dani Academic University</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Available Lessons</h1>
+
+        <div class="search-container">
+            <input type="text" v-model="searchTerm" placeholder="Search for lessons..." />
+        </div>
+
+        <div class="sort-buttons">
+            <button @click="setSortKey('name')">Sort by Subject</button>
+            <button @click="setSortKey('location')">Sort by Location</button>
+            <button @click="setSortKey('price')">Sort by Price</button>
+            <button @click="setSortKey('spaces')">Sort by Spaces</button>
+            <button @click="toggleSortOrder">Toggle Sort Order ({{ sortOrder === 'asc' ? 'Ascending' : 'Descending' }})</button>
+        </div>
+
+        <div class="products">
+            <div class="product" v-for="product in filteredProducts" :key="product.id">
+                <img :src="product.image" class="product-image" alt="Product Image">
+                <h2>{{ product.name }}</h2>
+                <p>Location: {{ product.location }}</p>
+                <p>Price: AED {{ product.price.toFixed(2) }}</p>
+                <p>Spaces Available: {{ product.spaces }}</p>
+                <button class="add-to-cart-button" :disabled="product.spaces <= 0" @click="addToCart(product)">
+                    <i class="fas fa-shopping-cart"></i>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+
+        <div class="cart-notification" v-if="cartHasItems">
+            You have {{ cart.length }} items in your cart.
+            <button class="view-cart-button" @click="viewCart">View Cart</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
