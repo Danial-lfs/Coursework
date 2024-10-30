@@ -11,7 +11,7 @@
     <div id="app">
         <!-- Checkout Toggle Button on the right side -->
         <button @click="toggleCheckout" class="checkout-toggle-button">
-            <i class="fas fa-shopping-cart"></i> {{ currentView === 'lessons' ? ' Go to Cart' : ' Back to Lessons' }}
+            <i class="fas fa-shopping-cart"></i> {{ currentView === 'checkout' ? 'Back to Lessons' : 'Checkout' }}
         </button>
 
         <!-- Main Header -->
@@ -24,20 +24,20 @@
             </div>
             
             <!-- Dropdown for Sorting and Asc/Desc Toggle -->
-<div class="sort-container">
-    <label for="sortSelect">Sort by:</label>
-    <select id="sortSelect" v-model="sortKey" @change="setSortKey(sortKey)">
-        <option value="name">Subject</option>
-        <option value="location">Location</option>
-        <option value="price">Price</option>
-        <option value="spaces">Spaces</option>
-    </select>
-    
-    <!-- Button to toggle Asc/Desc order -->
-    <button @click="toggleSortOrder" :aria-label="'Sort in ' + (sortOrder === 'asc' ? 'descending' : 'ascending') + ' order'">
-        {{ sortOrder === 'asc' ? 'Descending' : 'Ascending' }}
-    </button>
-</div>
+            <div class="sort-container">
+                <label for="sortSelect">Sort by:</label>
+                <select id="sortSelect" v-model="sortKey" @change="setSortKey(sortKey)">
+                    <option value="name">Subject</option>
+                    <option value="location">Location</option>
+                    <option value="price">Price</option>
+                    <option value="spaces">Spaces</option>
+                </select>
+                
+                <!-- Button to toggle Asc/Desc order -->
+                <button @click="toggleSortOrder" :aria-label="'Sort in ' + (sortOrder === 'asc' ? 'descending' : 'ascending') + ' order'">
+                    {{ sortOrder === 'asc' ? 'Descending' : 'Ascending' }}
+                </button>
+            </div>
 
             <!-- Lessons Display -->
             <div class="products">
@@ -89,8 +89,12 @@
             </div>
             <div>
                 <h3>Please enter your details:</h3>
-                <input type="text" v-model="customerName" placeholder="Name" @input="validateInput"/>
-                <input type="text" v-model="customerPhone" placeholder="Phone" @input="validateInput"/>
+                <input type="text" v-model="customerName" placeholder="Name" @input="validateName" />
+                <span v-if="nameError" class="error">{{ nameError }}</span> <!-- Error message display -->
+                
+                <input type="text" v-model="customerPhone" placeholder="Phone" @input="validatePhone" />
+                <span v-if="phoneError" class="error">{{ phoneError }}</span> <!-- Error message display -->
+
                 <button @click="checkout" :disabled="!isFormValid">Submit Order</button>
             </div>
             <button @click="switchView('cart')" class="back-to-cart-button">Back to Cart</button>
