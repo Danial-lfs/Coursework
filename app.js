@@ -21,8 +21,8 @@ new Vue({
             sortOrder: 'asc',
             customerName: '',
             customerPhone: '',
-            nameError: '', // Error message for customer name
-            phoneError: '' // Error message for customer phone
+            nameError: '', 
+            phoneError: '' 
         };
     },
     computed: {
