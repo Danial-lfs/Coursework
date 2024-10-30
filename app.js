@@ -4,16 +4,16 @@ new Vue({
         return {
             currentView: 'lessons',
             products: [
-                { id: 1, name: 'Art', price: 200.99, location: "Abu-Dhabi", spaces: 5, image: 'Art.jpg' },
-                { id: 2, name: 'Music', price: 199.99, location: "Sharjah", spaces: 5, image: 'Music.jpg' },
-                { id: 3, name: 'English', price: 299.99, location: "Dubai", spaces: 5, image: 'English.jpg' },
-                { id: 4, name: 'Biology', price: 500.99, location: "Qatar", spaces: 5, image: 'Biology.jpg' },
-                { id: 5, name: 'Science', price: 400.99, location: "Doha", spaces: 5, image: 'Science.png' },
-                { id: 6, name: 'History', price: 249.99, location: "Al-Thumama", spaces: 5, image: 'History.jpg' },
-                { id: 7, name: 'Geography', price: 249.99, location: "Wakra", spaces: 5, image: 'Geography.png' },
-                { id: 8, name: 'Chemistry', price: 199.99, location: "Abu-Hamour", spaces: 5, image: 'Chemistry.jpg' },
-                { id: 9, name: 'Physics', price: 299.99, location: "Ajman", spaces: 5, image: 'Physics.jpg' },
-                { id: 10, name: 'Maths', price: 299.99, location: "Academic city", spaces: 5, image: 'Maths.jpg' }
+                { id: 1, name: 'Art', price: 200.99, location: "Abu-Dhabi", spaces: 5, image: 'Images/Art.jpg' },
+                { id: 2, name: 'Music', price: 199.99, location: "Sharjah", spaces: 5, image: 'Images/Music.jpg' },
+                { id: 3, name: 'English', price: 299.99, location: "Dubai", spaces: 5, image: 'Images/English.jpg' },
+                { id: 4, name: 'Biology', price: 500.99, location: "Qatar", spaces: 5, image: 'Images/Biology.jpg' },
+                { id: 5, name: 'Science', price: 400.99, location: "Doha", spaces: 5, image: 'Images/Science.png' },
+                { id: 6, name: 'History', price: 249.99, location: "Al-Thumama", spaces: 5, image: 'Images/History.jpg' },
+                { id: 7, name: 'Geography', price: 249.99, location: "Wakra", spaces: 5, image: 'Images/Geography.png' },
+                { id: 8, name: 'Chemistry', price: 199.99, location: "Abu-Hamour", spaces: 5, image: 'Images/Chemistry.jpg' },
+                { id: 9, name: 'Physics', price: 299.99, location: "Ajman", spaces: 5, image: 'Images/Physics.jpg' },
+                { id: 10, name: 'Maths', price: 299.99, location: "Academic city", spaces: 5, image: 'Images/Maths.jpg' }
             ],
             cart: JSON.parse(localStorage.getItem('cart')) || [],
             searchTerm: '',
@@ -21,6 +21,8 @@ new Vue({
             sortOrder: 'asc',
             customerName: '',
             customerPhone: '',
+            nameError: '', // Error message for customer name
+            phoneError: '' // Error message for customer phone
         };
     },
     computed: {
@@ -57,7 +59,9 @@ new Vue({
         isFormValid() {
             const nameRegex = /^[A-Za-z\s]+$/;
             const phoneRegex = /^\d+$/;
-            return nameRegex.test(this.customerName) && phoneRegex.test(this.customerPhone);
+            this.nameError = nameRegex.test(this.customerName) ? '' : 'Please enter a valid name';
+            this.phoneError = phoneRegex.test(this.customerPhone) ? '' : 'Please enter a valid phone number';
+            return this.nameError === '' && this.phoneError === '';
         }
     },
     methods: {
@@ -81,37 +85,46 @@ new Vue({
                     this.cart.push({ product: product, quantity: 1 });
                 }
                 product.spaces--;
-                localStorage.setItem('cart', JSON.stringify(this.cart));
+                this.updateCartStorage();
                 alert(`${product.name} added to cart. Spaces left: ${product.spaces}`);
             }
         },
         removeFromCart(index) {
             const item = this.cart[index];
-            item.product.spaces++; 
-            this.cart.splice(index, 1); 
-            localStorage.setItem('cart', JSON.stringify(this.cart));
+            item.product.spaces++;
+            this.cart.splice(index, 1);
+            this.updateCartStorage();
             alert(`${item.product.name} removed from cart. Spaces available: ${item.product.spaces}`);
         },
         switchView(view) {
             this.currentView = view;
         },
-        validateInput() {
-            this.isFormValid;
+        updateCartStorage() {
+            localStorage.setItem('cart', JSON.stringify(this.cart));
         },
         checkout() {
             if (this.isFormValid) {
                 alert(`Order submitted for ${this.customerName}.\nPhone: ${this.customerPhone}`);
                 this.cart = [];
-                localStorage.setItem('cart', JSON.stringify(this.cart));
+                this.updateCartStorage();
                 this.customerName = '';
                 this.customerPhone = '';
                 this.switchView('lessons'); 
+                alert('Thank you! Your order has been placed.');
             } else {
                 alert('Please enter valid name and phone number.');
             }
         },
         toggleCheckout() {
-            this.currentView = this.currentView === 'lessons' ? 'cart' : 'lessons';
+            this.currentView = this.currentView === 'checkout' ? 'lessons' : 'checkout';
+        },
+        validateName() {
+            const nameRegex = /^[A-Za-z\s]+$/;
+            this.nameError = nameRegex.test(this.customerName) ? '' : 'Please enter a valid name';
+        },
+        validatePhone() {
+            const phoneRegex = /^\d+$/;
+            this.phoneError = phoneRegex.test(this.customerPhone) ? '' : 'Please enter a valid phone number';
         }
     }
 });
