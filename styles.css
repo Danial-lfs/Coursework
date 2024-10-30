@@ -1,4 +1,4 @@
-/* General Styles */
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #FFECC8;
@@ -17,7 +17,7 @@ h1, h2, h3 {
     padding: 20px;
 }
 
-/* Button Styles */
+
 button {
     background-color: #ff6f61;
     color: white;
@@ -29,17 +29,17 @@ button {
     transition: background-color 0.3s ease, transform 0.2s;
 }
 
-button:hover {
+button: hover {
     background-color: #e65c50;
     transform: scale(1.05);
 }
 
-/* Active View */
+
 .active-view {
     background-color: #e65c50;
 }
 
-/* Cart Button with Indicator */
+
 .cart-button {
     position: relative;
     background-color: #ff6f61;
@@ -64,7 +64,7 @@ button:hover {
     font-weight: bold;
 }
 
-/* Lessons Page */
+
 .products {
     display: flex;
     flex-wrap: wrap;
@@ -93,7 +93,7 @@ button:hover {
     border-radius: 10px;
 }
 
-/* Cart Page */
+
 .cart-items {
     margin-top: 20px;
 }
@@ -128,7 +128,7 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Checkout Page */
+
 .checkout-section {
     margin-top: 20px;
     background-color: #fff;
@@ -187,7 +187,7 @@ button:hover {
     transform: scale(1.02);
 }
 
-/* Back to Cart Button */
+
 .back-to-cart-button {
     background-color: #ddd;
     color: #333;
@@ -207,7 +207,7 @@ button:hover {
     background-color: #bbb;
 }
 
-/* Notification for Cart */
+
 .cart-notification {
     background: #dff0d8;
     color: #3c763d;
@@ -217,7 +217,7 @@ button:hover {
     text-align: center;
 }
 
-/* Checkout Toggle Button Styles */
+
 .checkout-toggle-button {
     position: absolute;
     top: 20px;
