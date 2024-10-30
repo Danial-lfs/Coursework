@@ -219,26 +219,25 @@ button:hover {
 
 /* Checkout Toggle Button Styles */
 .checkout-toggle-button {
-    position: absolute; /* Positioning at the top right */
-    top: 20px; /* Distance from the top */
-    right: 20px; /* Distance from the right */
-    background-color: #ff6f61; /* Background color */
-    color: white; /* Text color */
-    border: none; /* No border */
-    padding: 12px 20px; /* Padding */
-    cursor: pointer; /* Hand cursor on hover */
-    border-radius: 25px; /* Rounded corners */
-    font-size: 16px; /* Font size */
-    transition: background-color 0.3s ease; /* Transition effect */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .checkout-toggle-button:hover {
-    background-color: #e65c50; /* Darker shade on hover */
+    background-color: #e65c50;
 }
 
-/* Add Font Awesome icon styling */
 .checkout-toggle-button i {
-    margin-right: 5px; /* Space between icon and text */
+    margin-right: 5px;
 }
 
 /* Responsive Styles */
