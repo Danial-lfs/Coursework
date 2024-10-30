@@ -240,7 +240,7 @@ button:hover {
     margin-right: 5px;
 }
 
-/* Responsive Styles */
+
 @media (max-width: 768px) {
     .product {
         width: calc(50% - 40px); 
@@ -270,7 +270,7 @@ button:hover {
     }
 }
 
-/* Hide the cart button on the left */
+
 .selector-of-left-cart-button {
     display: none;
 }
