@@ -9,40 +9,95 @@
 </head>
 <body>
     <div id="app">
-        <h1>Available Lessons</h1>
+        <!-- Checkout Toggle Button on the right side -->
+        <button @click="toggleCheckout" class="checkout-toggle-button">
+            <i class="fas fa-shopping-cart"></i> {{ currentView === 'lessons' ? ' Go to Cart' : ' Back to Lessons' }}
+        </button>
 
-        <div class="search-container">
-            <input type="text" v-model="searchTerm" placeholder="Search for lessons..." />
-        </div>
+        <!-- Main Header -->
+        <h1>{{ currentView === 'lessons' ? 'Available Lessons' : currentView === 'cart' ? 'Shopping Cart' : 'Checkout' }}</h1>
+        
+        <!-- Search & Sort Section (Available in Lessons View) -->
+        <div v-if="currentView === 'lessons'">
+            <div class="search-container">
+                <input type="text" v-model="searchTerm" placeholder="Search for lessons..." />
+            </div>
+            
+            <!-- Dropdown for Sorting and Asc/Desc Toggle -->
+<div class="sort-container">
+    <label for="sortSelect">Sort by:</label>
+    <select id="sortSelect" v-model="sortKey" @change="setSortKey(sortKey)">
+        <option value="name">Subject</option>
+        <option value="location">Location</option>
+        <option value="price">Price</option>
+        <option value="spaces">Spaces</option>
+    </select>
+    
+    <!-- Button to toggle Asc/Desc order -->
+    <button @click="toggleSortOrder" :aria-label="'Sort in ' + (sortOrder === 'asc' ? 'descending' : 'ascending') + ' order'">
+        {{ sortOrder === 'asc' ? 'Descending' : 'Ascending' }}
+    </button>
+</div>
 
-        <div class="sort-buttons">
-            <button @click="setSortKey('name')">Sort by Subject</button>
-            <button @click="setSortKey('location')">Sort by Location</button>
-            <button @click="setSortKey('price')">Sort by Price</button>
-            <button @click="setSortKey('spaces')">Sort by Spaces</button>
-            <button @click="toggleSortOrder">Toggle Sort Order ({{ sortOrder === 'asc' ? 'Ascending' : 'Descending' }})</button>
-        </div>
+            <!-- Lessons Display -->
+            <div class="products">
+                <div class="product" v-for="product in filteredProducts" :key="product.id">
+                    <img :src="product.image" class="product-image" alt="Product Image">
+                    <h2>{{ product.name }}</h2>
+                    <p>Location: {{ product.location }}</p>
+                    <p>Price: AED {{ product.price.toFixed(2) }}</p>
+                    <p>Spaces Available: {{ product.spaces }}</p>
+                    <button class="add-to-cart-button" :disabled="product.spaces <= 0" @click="addToCart(product)">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
 
-        <div class="products">
-            <div class="product" v-for="product in filteredProducts" :key="product.id">
-                <img :src="product.image" class="product-image" alt="Product Image">
-                <h2>{{ product.name }}</h2>
-                <p>Location: {{ product.location }}</p>
-                <p>Price: AED {{ product.price.toFixed(2) }}</p>
-                <p>Spaces Available: {{ product.spaces }}</p>
-                <button class="add-to-cart-button" :disabled="product.spaces <= 0" @click="addToCart(product)">
-                    <i class="fas fa-shopping-cart"></i>
-                    Add to Cart
-                </button>
+            <!-- Cart Notification -->
+            <div class="cart-notification" v-if="cartHasItems">
+                You have {{ cart.length }} items in your cart.
+                <button class="view-cart-button" @click="switchView('cart')">View Cart</button>
             </div>
         </div>
 
-        <div class="cart-notification" v-if="cartHasItems">
-            You have {{ cart.length }} items in your cart.
-            <button class="view-cart-button" @click="viewCart">View Cart</button>
+        <!-- Cart View -->
+        <div v-else-if="currentView === 'cart'">
+            <div class="cart-items" v-if="cartHasItems">
+                <div class="cart-item" v-for="(item, index) in cart" :key="item.product.id">
+                    <img :src="item.product.image" alt="Product image" class="product-image">
+                    <h3>{{ item.product.name }}</h3>
+                    <p>Location: {{ item.product.location }}</p>
+                    <p class="price">AED {{ item.product.price.toFixed(2) }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <button @click="removeFromCart(index)" class="remove-button">Remove</button>
+                </div>
+            </div>
+            <p v-else>Your cart is empty.</p>
+            <button @click="switchView('lessons')" class="back-to-lessons-button">Back to Lessons</button>
+            <button @click="switchView('checkout')" class="checkout-button" v-if="cartHasItems">Proceed to Checkout</button>
+        </div>
+
+        <!-- Checkout View -->
+        <div v-else-if="currentView === 'checkout'">
+            <div>
+                <h2>Order Summary</h2>
+                <ul>
+                    <li v-for="item in cart" :key="item.product.id">
+                        {{ item.product.name }} - AED {{ item.product.price.toFixed(2) }} x {{ item.quantity }}
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3>Please enter your details:</h3>
+                <input type="text" v-model="customerName" placeholder="Name" @input="validateInput"/>
+                <input type="text" v-model="customerPhone" placeholder="Phone" @input="validateInput"/>
+                <button @click="checkout" :disabled="!isFormValid">Submit Order</button>
+            </div>
+            <button @click="switchView('cart')" class="back-to-cart-button">Back to Cart</button>
         </div>
     </div>
 
+    <!-- Vue and App Script -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="app.js"></script>
 </body>

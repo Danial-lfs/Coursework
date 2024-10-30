@@ -26,11 +26,42 @@ button {
     cursor: pointer;
     border-radius: 25px;
     font-size: 16px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s;
 }
 
 button:hover {
     background-color: #e65c50;
+    transform: scale(1.05);
+}
+
+/* Active View */
+.active-view {
+    background-color: #e65c50;
+}
+
+/* Cart Button with Indicator */
+.cart-button {
+    position: relative;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.cart-button .cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #d9534f;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 /* Lessons Page */
@@ -93,29 +124,87 @@ button:hover {
 
 .remove-button:hover {
     background: #c9302c;
+    color: #ffffff;
+    transform: scale(1.05);
 }
 
 /* Checkout Page */
 .checkout-section {
     margin-top: 20px;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+    margin: 20px auto;
 }
 
-input[type="text"] {
+.checkout-section h2, .checkout-section h3 {
+    color: #ff6f61;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.checkout-section ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.checkout-section ul li {
+    font-size: 16px;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.checkout-section input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.checkout-section input[type="text"]:focus {
+    border-color: #ff6f61;
+    box-shadow: 0 0 8px rgba(255, 111, 97, 0.4);
+}
+
+.checkout-section button {
     width: 100%;
     padding: 12px;
-    margin: 5px 0 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: border-color 0.3s;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-input[type="text"]:focus {
-    border-color: #ff6f61;
-    outline: none;
+.checkout-section button:hover {
+    background-color: #e65c50;
+    transform: scale(1.02);
+}
+
+/* Back to Cart Button */
+.back-to-cart-button {
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 6px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.back-to-cart-button:hover {
+    background-color: #bbb;
 }
 
 /* Notification for Cart */
@@ -126,6 +215,30 @@ input[type="text"]:focus {
     border: 1px solid #d6e9c6;
     border-radius: 10px;
     text-align: center;
+}
+
+/* Checkout Toggle Button Styles */
+.checkout-toggle-button {
+    position: absolute; /* Positioning at the top right */
+    top: 20px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
+    background-color: #ff6f61; /* Background color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    padding: 12px 20px; /* Padding */
+    cursor: pointer; /* Hand cursor on hover */
+    border-radius: 25px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.checkout-toggle-button:hover {
+    background-color: #e65c50; /* Darker shade on hover */
+}
+
+/* Add Font Awesome icon styling */
+.checkout-toggle-button i {
+    margin-right: 5px; /* Space between icon and text */
 }
 
 /* Responsive Styles */
@@ -146,10 +259,19 @@ input[type="text"]:focus {
     .checkout-section {
         padding: 15px;
     }
+
+    button {
+        padding: 14px 24px;
+    }
 }
 
 @media (max-width: 480px) {
     .product {
         width: 100%; 
     }
+}
+
+/* Hide the cart button on the left */
+.selector-of-left-cart-button {
+    display: none;
 }
