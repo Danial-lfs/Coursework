@@ -23,7 +23,7 @@
                 <input type="text" v-model="searchTerm" placeholder="Search for lessons..." />
             </div>
             
-            
+           
             <div class="sort-container">
                 <label for="sortSelect">Sort by:</label>
                 <select id="sortSelect" v-model="sortKey" @change="setSortKey(sortKey)">
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            
+           
             <div class="cart-notification" v-if="cartHasItems">
                 You have {{ cart.length }} items in your cart.
                 <button class="view-cart-button" @click="switchView('cart')">View Cart</button>
@@ -77,31 +77,34 @@
             <button @click="switchView('checkout')" class="checkout-button" v-if="cartHasItems">Proceed to Checkout</button>
         </div>
 
-        
+        <!-- Checkout View -->
         <div v-else-if="currentView === 'checkout'">
-            <div>
-                <h2>Order Summary</h2>
-                <ul>
-                    <li v-for="item in cart" :key="item.product.id">
-                        {{ item.product.name }} - AED {{ item.product.price.toFixed(2) }} x {{ item.quantity }}
-                    </li>
-                </ul>
+            <h2>Order Summary</h2>
+            <div class="cart-items" v-if="cartHasItems">
+                <div class="cart-item" v-for="(item, index) in cart" :key="item.product.id">
+                    <img :src="item.product.image" alt="Product image" class="product-image">
+                    <h3>{{ item.product.name }}</h3>
+                    <p>Location: {{ item.product.location }}</p>
+                    <p class="price">AED {{ item.product.price.toFixed(2) }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <button @click="removeFromCart(index)" class="remove-button">Remove</button>
+                </div>
             </div>
-            <div>
-                <h3>Please enter your details:</h3>
-                <input type="text" v-model="customerName" placeholder="Name" @input="validateName" />
-                <span v-if="nameError" class="error">{{ nameError }}</span> 
-                
-                <input type="text" v-model="customerPhone" placeholder="Phone" @input="validatePhone" />
-                <span v-if="phoneError" class="error">{{ phoneError }}</span> 
+            <p v-else>Your cart is empty.</p>
 
-                <button @click="checkout" :disabled="!isFormValid">Submit Order</button>
-            </div>
+            <h3>Please enter your details:</h3>
+            <input type="text" v-model="customerName" placeholder="Name" @input="validateName" />
+            <span v-if="nameError" class="error">{{ nameError }}</span>
+
+            <input type="text" v-model="customerPhone" placeholder="Phone" @input="validatePhone" />
+            <span v-if="phoneError" class="error">{{ phoneError }}</span>
+
+            <button @click="checkout" :disabled="!isFormValid">Submit Order</button>
             <button @click="switchView('cart')" class="back-to-cart-button">Back to Cart</button>
         </div>
     </div>
 
-    
+   
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="app.js"></script>
 </body>
