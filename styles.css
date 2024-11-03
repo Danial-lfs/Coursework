@@ -1,13 +1,13 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #FFECC8;
+    background-color: #FFECC8; 
     margin: 0;
     padding: 0;
 }
 
 h1, h2, h3 {
-    color: #333;
+    color: #333; 
     text-align: center;
 }
 
@@ -18,8 +18,33 @@ h1, h2, h3 {
 }
 
 
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.search-container input[type="text"] {
+    width: 80%;
+    max-width: 600px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.search-container input[type="text"]:focus {
+    border-color: #ff6f61; 
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 111, 97, 0.4);
+}
+
+
 button {
-    background-color: #ff6f61;
+    background-color: #ff6f61; 
     color: white;
     border: none;
     padding: 12px 20px;
@@ -29,20 +54,20 @@ button {
     transition: background-color 0.3s ease, transform 0.2s;
 }
 
-button: hover {
-    background-color: #e65c50;
+button:hover {
+    background-color: #e65c50; 
     transform: scale(1.05);
 }
 
 
 .active-view {
-    background-color: #e65c50;
+    background-color: #e65c50; 
 }
 
 
 .cart-button {
     position: relative;
-    background-color: #ff6f61;
+    background-color: #ff6f61; 
     color: white;
     border: none;
     padding: 12px 20px;
@@ -56,7 +81,7 @@ button: hover {
     position: absolute;
     top: -5px;
     right: -10px;
-    background-color: #d9534f;
+    background-color: #d9534f; 
     color: white;
     border-radius: 50%;
     padding: 5px 10px;
@@ -73,22 +98,22 @@ button: hover {
 }
 
 .product {
-    background: white;
+    background: white; 
     border-radius: 10px;
     padding: 20px;
     margin: 10px;
     text-align: center;
     width: calc(25% - 40px); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     transition: transform 0.3s;
 }
 
 .product:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px); 
 }
 
 .product-image {
-    width: 100%;
+    width: 100%; 
     height: auto;
     border-radius: 10px;
 }
@@ -102,45 +127,46 @@ button: hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #ffffff;
+    background: #ffffff; 
     border-radius: 10px;
     padding: 15px;
     margin: 10px 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .product-image {
-    width: 80px;
+    width: 80px; 
     height: auto;
     margin-right: 15px;
     border-radius: 10px;
 }
 
 .remove-button {
-    background: #d9534f;
+    background: #d9534f; 
     padding: 5px 10px;
     border-radius: 5px;
+    color: white; 
 }
 
 .remove-button:hover {
-    background: #c9302c;
-    color: #ffffff;
-    transform: scale(1.05);
+    background: #c9302c; 
+    color: #ffffff; 
+    transform: scale(1.05); 
 }
 
 
 .checkout-section {
     margin-top: 20px;
-    background-color: #fff;
+    background-color: #fff; 
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
     max-width: 600px;
     margin: 20px auto;
 }
 
 .checkout-section h2, .checkout-section h3 {
-    color: #ff6f61;
+    color: #ff6f61; 
     margin-bottom: 15px;
     text-align: center;
 }
@@ -152,29 +178,29 @@ button: hover {
 }
 
 .checkout-section ul li {
-    font-size: 16px;
+    font-size: 16px; 
     padding: 10px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0; 
 }
 
 .checkout-section input[type="text"] {
     width: 100%;
     padding: 14px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #e0e0e0; 
     border-radius: 6px;
     margin-bottom: 15px;
     font-size: 16px;
 }
 
 .checkout-section input[type="text"]:focus {
-    border-color: #ff6f61;
+    border-color: #ff6f61; 
     box-shadow: 0 0 8px rgba(255, 111, 97, 0.4);
 }
 
 .checkout-section button {
     width: 100%;
     padding: 12px;
-    background-color: #ff6f61;
+    background-color: #ff6f61; 
     color: white;
     border: none;
     border-radius: 6px;
@@ -183,20 +209,20 @@ button: hover {
 }
 
 .checkout-section button:hover {
-    background-color: #e65c50;
-    transform: scale(1.02);
+    background-color: #e65c50; 
+    transform: scale(1.02); 
 }
 
 
 .back-to-cart-button {
-    background-color: #ddd;
+    background-color: #ddd; 
     color: #333;
     border: none;
     padding: 10px;
     margin-top: 15px;
     border-radius: 6px;
     display: block;
-    width: 100%;
+    width: 100%; 
     text-align: center;
     text-decoration: none;
     font-size: 16px;
@@ -204,25 +230,25 @@ button: hover {
 }
 
 .back-to-cart-button:hover {
-    background-color: #bbb;
+    background-color: #bbb; 
 }
 
 
 .cart-notification {
-    background: #dff0d8;
-    color: #3c763d;
+    background: #dff0d8; 
+    color: #3c763d; 
     padding: 15px;
-    border: 1px solid #d6e9c6;
+    border: 1px solid #d6e9c6; 
     border-radius: 10px;
     text-align: center;
 }
 
 
 .checkout-toggle-button {
-    position: absolute;
+    position: absolute; 
     top: 20px;
     right: 20px;
-    background-color: #ff6f61;
+    background-color: #ff6f61; 
     color: white;
     border: none;
     padding: 12px 20px;
@@ -233,11 +259,11 @@ button: hover {
 }
 
 .checkout-toggle-button:hover {
-    background-color: #e65c50;
+    background-color: #e65c50; 
 }
 
 .checkout-toggle-button i {
-    margin-right: 5px;
+    margin-right: 5px; 
 }
 
 
@@ -247,20 +273,20 @@ button: hover {
     }
 
     .cart-item {
-        flex-direction: column;
+        flex-direction: column; 
         align-items: flex-start;
     }
 
     .product-image {
-        margin-bottom: 10px;
+        margin-bottom: 10px; 
     }
 
     .checkout-section {
-        padding: 15px;
+        padding: 15px; 
     }
 
     button {
-        padding: 14px 24px;
+        padding: 14px 24px; 
     }
 }
 
