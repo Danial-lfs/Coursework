@@ -21,8 +21,8 @@ new Vue({
             sortOrder: 'asc',
             customerName: '',
             customerPhone: '',
-            nameError: '', 
-            phoneError: '' 
+            nameError: '', // Error message for customer name
+            phoneError: '' // Error message for customer phone
         };
     },
     computed: {
@@ -30,13 +30,13 @@ new Vue({
             return this.products.slice().sort((a, b) => {
                 let modifier = this.sortOrder === 'asc' ? 1 : -1;
                 if (this.sortKey === 'name') {
-                    return a.name.localeCompare(b.name) * modifier;
+                    return modifier * a.name.localeCompare(b.name);
                 } else if (this.sortKey === 'location') {
-                    return a.location.localeCompare(b.location) * modifier;
+                    return modifier * a.location.localeCompare(b.location);
                 } else if (this.sortKey === 'price') {
-                    return (a.price - b.price) * modifier;
+                    return modifier * (a.price - b.price);
                 } else if (this.sortKey === 'spaces') {
-                    return (a.spaces - b.spaces) * modifier;
+                    return modifier * (a.spaces - b.spaces);
                 }
                 return 0;
             });
