@@ -10,9 +10,12 @@
 <body>
     <div id="app">
         
-        <button @click="toggleCheckout" class="checkout-toggle-button">
-            <i class="fas fa-shopping-cart"></i> {{ currentView === 'checkout' ? 'Back to Lessons' : 'Checkout' }}
-        </button>
+        <button @click="toggleCheckout" 
+        class="checkout-toggle-button" 
+        :disabled="!cartHasItems">
+    <i class="fas fa-shopping-cart"></i> 
+    {{ currentView === 'checkout' ? 'Back to Lessons' : 'Checkout' }}
+</button>
 
         
         <h1>{{ currentView === 'lessons' ? 'Available Lessons' : currentView === 'cart' ? 'Shopping Cart' : 'Checkout' }}</h1>
